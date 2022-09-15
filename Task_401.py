@@ -14,10 +14,8 @@ def calc_pi_Leibnic(accuracy: int) -> float:
     for i in range(0, 1000000): #accuracy + 1
         if count % 2 == 0:
             result += (4 / denom) - (4 / (denom + 2))
-            #print(f'(4 / {denom}) - (4 / ({denom + 2}))')
         else:
             result += (4 / denom) - (4 / (denom + 2))
-            #print(f'(4 / {denom}) - (4 / ({denom + 2}))')
         count += 1
         denom += 4
     return int(result * accuracy) / accuracy
@@ -33,13 +31,13 @@ def calc_pi_Nilakant(accuracy: int) -> float:
     for i in range(0, 1000000):
         if count % 2 == 0:
             result += (4 / ((denom+1)*(denom+2)*(denom+3)))
-            #print(f'(4 / (({denom+1})*({denom+2})*({denom+3})))')
         else:
             result -= (4 / ((denom+1)*(denom+2)*(denom+3)))
-            #print(f'(4 / (({denom+1})*({denom+2})*({denom+3})))')
         count += 1
         denom += 2
     return int(result * accuracy) / accuracy
+
+# Функция вычисления заданной точности
 
 def calc_accur(input: str) -> int:
     result = input[input.find('.') + 1:]
@@ -50,8 +48,8 @@ def calc_accur(input: str) -> int:
 accur_input = input('Введите точность в формате 0.001: ')
 accur_number = calc_accur(accur_input)
 
-print(calc_pi_Leibnic(calc_accur(accur_input)))
-print(calc_pi_Nilakant(calc_accur(accur_input)))
-print(math.pi)
+print(f'Вычисление при помощи рядов Лейбница: {calc_pi_Leibnic(calc_accur(accur_input))}')
+print(f'Вычисление при помощи рядов Нилаканта: {calc_pi_Nilakant(calc_accur(accur_input))}')
+print(f'Для проверки правильности расчета до точности {len(str(accur_number - 1))} знака/ов: {math.pi}')
 
 
