@@ -21,31 +21,36 @@ def polynomial_generate(k: int) -> str:
            "-": "\u207B"
            }
     
-    for i in range(2):
+    for i in range(3):
         ran_number = randint(0, 100)
         if ran_number == 0:
             continue
         if ran_number == 1:
-            output_string += f'x{indexes.get(str(k), 0)}'
+            if k == 0:
+                output_string += f'{ran_number}'
+            elif k == 1:
+                output_string += f'x'
+            else:
+                output_string += f'x{indexes.get(str(k), 0)}'
         else:
-            output_string += f'{ran_number}*x{indexes.get(str(k), 0)}'
+            if k == 0:
+                output_string += f'{ran_number}'
+            elif k == 1:
+                output_string += f'{ran_number}*x'
+            else:
+                output_string += f'{ran_number}*x{indexes.get(str(k), 0)}'
         
         k -= 1
-        output_string += ' + '
-
-    ran_number = randint(0, 100)
-    if k == 0:
-        output_string += f'{ran_number} = 0'
-    elif k == 1:
-        output_string += f'{ran_number}*x = 0'
-    else:
-        output_string += f'{ran_number}*x{indexes.get(str(k), 0)} = 0'
-           
+        if i < 2:
+            output_string += ' + '
+        else:
+            output_string += ' = 0'
+          
     return output_string
 
-k = int(input())
+k = int(input('Введите число больше 1: '))
 print(polynomial_generate(k))
 
-with open('Task_404.txt', 'w', encoding = "utf-8") as f:
+with open('PY_HomeWork\Task_404.txt', 'w', encoding = "utf-8") as f:
     f.write(polynomial_generate(k))
 
